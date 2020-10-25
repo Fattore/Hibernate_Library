@@ -1,5 +1,7 @@
 package hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -7,14 +9,19 @@ import javax.persistence.*;
 public class Autor {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Codigo_Aut", nullable = false)
     private int Codigo_Aut;
 
-    @Column(name = "Nome_Aut")      
+    @Column(name = "Nome_Aut", length = 150, nullable = false)      
     private String Nome_Aut;
 
-    @Column(name = "Email")      
-    private int Email;
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    @JoinColumn(name = "Email")
+    public List<Email> email = new ArrayList();
     
     public int getCodigo_Aut() {
         return Codigo_Aut;
@@ -32,11 +39,11 @@ public class Autor {
         this.Nome_Aut = Nome_Aut;
     }
 
-    public int getEmail() {
-        return Email;
+    public List<Email> getEmail() {
+        return email;
     }
 
-    public void setEmail(int Email) {
-        this.Email = Email;
+    public void setEmail(List<Email> email) {
+        this.email = email;
     }
 }

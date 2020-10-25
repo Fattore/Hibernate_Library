@@ -1,5 +1,6 @@
 package hibernate;
 
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -8,22 +9,25 @@ public class Livro {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ISBN", nullable = false)
     private int ISBN;
     
-    @Column(name = "Edicao")  
+    @Column(name = "Edicao", length = 225, nullable = false)  
     private String edicao;
     
-    @Column(name = "Custo")  
+    @Column(name = "Custo", length = 53, nullable = false)  
     private float custo;
     
-    @Column(name = "Titulo")   
+    @Column(name = "Titulo", length = 255, nullable = false)   
     private String titulo;
     
-    @Column(name = "Editora") 
-    private int editora;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Autor")
+    private Autor autor;
     
-    @Column(name = "Autor") 
-    private int autor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Editora")
+    public Editora editora;
     
     public int getISBN() {
         return ISBN;
@@ -56,23 +60,22 @@ public class Livro {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
-    public int getEditora() {
+
+    public Editora getEditora() {
         return editora;
     }
 
-    public void setEditora(int editora) {
+    public void setEditora(Editora editora) {
         this.editora = editora;
     }
-
-    public int getAutor() {
+    
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(int autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
-    }    
+    }
     
-    public Livro(){}
-     
+    public Livro(){}   
 }

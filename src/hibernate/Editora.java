@@ -8,13 +8,15 @@ public class Editora {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Codigo_Edit", nullable = false)    
     private int Codigo_Edit;
     
-    @Column(name = "Nome_Edit") 
+    @Column(name = "Nome_Edit", length = 150, nullable = false) 
     private String Nome_Edit;
     
-    @Column(name = "Livro") 
-    private int Livro;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Livro")
+    private Livro Livro;
       
     public int getCodigo_Edit() {
         return Codigo_Edit;
@@ -32,14 +34,13 @@ public class Editora {
         this.Nome_Edit = Nome_Edit;
     }
 
-    public int getLivro() {
+    public Livro getLivro() {
         return Livro;
     }
 
-    public void setLivro(int Livro) {
-        this.Livro = Livro;
+    public void setLivro(Livro Livros) {
+        this.Livro = Livros;
     }
     
-    public Editora(){}
-     
+    public Editora(){}   
 }    

@@ -1,5 +1,6 @@
 package hibernate;
 
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -7,14 +8,22 @@ import javax.persistence.*;
 public class Email {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Codigo_Email", nullable = false)    
     private int Codigo_Email;
     
-    @Column(name = "Email")    
+    @Column(name = "Email", length = 255, nullable = false)    
     private String Email;
     
-    @Column(name = "Codigo_Aut")    
-    private int Codigo_Aut;
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Autor> Codigo_Aut;
+
+    public Email(String showInputDialog) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public int getCodigo_Email() {
         return Codigo_Email;
@@ -32,11 +41,13 @@ public class Email {
         this.Email = Email;
     }
 
-    public int getCodigo_Aut() {
+    public List<Autor> getEditora() {
         return Codigo_Aut;
     }
 
-    public void setCodigo_Aut(int Codigo_Aut) {
-        this.Codigo_Aut = Codigo_Aut;
+    public void setEditora(List<Autor> editora) {
+        this.Codigo_Aut = editora;
     }
+    
+    public Email(){}
 }
