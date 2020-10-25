@@ -4,6 +4,7 @@ import hibernate.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.persistence.*;
+import script.*;
 
 public class TesteHibernate {
 
@@ -54,6 +55,10 @@ public class TesteHibernate {
             
                     }
                     entityManager.close();
+                    entityManagerFactory.close();
+                    
+                    HQL_Script hql = new HQL_Script();
+                    hql.consultaAutor();
                     
                 } else if(opcao == "Visualizar") {
                     String var;
@@ -63,7 +68,10 @@ public class TesteHibernate {
 
                     System.out.println("Código Autor: "+aut.getCodigo_Aut()+"\n"+
                                        "Nome: "+aut.getNome_Aut()+"\n"+
-                                       "Email: "+aut.getEmail()+"\n");                         
+                                       "Email: "+aut.getEmail()+"\n");
+                    
+                    HQL_Script hql = new HQL_Script();
+                    hql.consultaAutor();
                 } else {
                     JOptionPane optionPane = new JOptionPane("Error!", JOptionPane.ERROR_MESSAGE);
                     JDialog dialog = optionPane.createDialog("Opção Inválida");
@@ -111,7 +119,10 @@ public class TesteHibernate {
             
                     }
                     entityManager.close();                    
+                    entityManagerFactory.close();
                     
+                    HQL_Script hql = new HQL_Script();
+                    hql.consultaEditora();
                 } else if (opcao == "Visualizar") {
                     String var;
                     
@@ -120,7 +131,10 @@ public class TesteHibernate {
 
                     System.out.println("Código Autor: "+edit.getCodigo_Edit()+"\n"+
                                        "Nome: "+edit.getNome_Edit()+"\n"+
-                                       "Email: "+edit.getLivro()+"\n");    
+                                       "Email: "+edit.getLivro()+"\n");
+                    
+                    HQL_Script hql = new HQL_Script();
+                    hql.consultaEditora();
                 } else {
                     JOptionPane optionPane = new JOptionPane("Error!", JOptionPane.ERROR_MESSAGE);
                     JDialog dialog = optionPane.createDialog("Opção Inválida");
@@ -188,7 +202,8 @@ public class TesteHibernate {
                         entityManager.getTransaction().rollback();
             
                     }
-                    entityManager.close();    
+                    entityManager.close();
+                    entityManagerFactory.close();
                 } else if(opcao == "Visualizar") {
                     String var;
                     

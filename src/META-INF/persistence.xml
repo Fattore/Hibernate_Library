@@ -3,14 +3,14 @@
   <persistence-unit name="Hibernate_ProjectPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.format_sql" value="true"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Biblioteca"/>
       <property name="javax.persistence.jdbc.user" value="Fratty"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.password" value="tfg548788"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>
